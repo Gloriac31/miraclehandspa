@@ -22,7 +22,7 @@
       ]
     },
     {
-      "source": "/*.jpg",
+      "source": "/:path*.jpg",
       "headers": [
         {
           "key": "Cache-Control",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "source": "/*.jpeg",
+      "source": "/:path*.jpeg",
       "headers": [
         {
           "key": "Cache-Control",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "source": "/*.png",
+      "source": "/:path*.png",
       "headers": [
         {
           "key": "Cache-Control",
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "source": "/*.gif",
+      "source": "/:path*.gif",
       "headers": [
         {
           "key": "Cache-Control",
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "source": "/*.webp",
+      "source": "/:path*.webp",
       "headers": [
         {
           "key": "Cache-Control",
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "source": "/*.svg",
+      "source": "/:path*.svg",
       "headers": [
         {
           "key": "Cache-Control",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "source": "/*.ico",
+      "source": "/:path*.ico",
       "headers": [
         {
           "key": "Cache-Control",
