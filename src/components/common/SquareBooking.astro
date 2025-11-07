@@ -2,6 +2,23 @@
 // Square Booking Modal Component
 ---
 
+<style>
+    /* Hide any Square widgets that auto-display on the page (not in modal) */
+    iframe[src*="squareup.com"]:not(#square-widget-container iframe),
+    iframe[src*="app.squareup.com"]:not(#square-widget-container iframe),
+    [data-square-appointments]:not(#square-widget-container [data-square-appointments]) {
+        display: none !important;
+    }
+    
+    /* Show Square widget only when in the modal container */
+    #square-widget-container iframe,
+    #square-widget-container [data-square-appointments] {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
 <div id="square-booking-modal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-80">
     <div class="relative w-full max-w-4xl h-[90vh] max-h-[800px] bg-white rounded-xl shadow-2xl overflow-hidden">
         <button 
@@ -32,41 +49,62 @@
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
-            // The Square widget script should automatically create the booking interface
-            // Wait for it to load and try to find/move it to our container
-            const checkForWidget = setInterval(() => {
-                // Look for Square widget elements that the script creates
-                const squareWidget = document.querySelector('iframe[src*="squareup.com"], [data-square-appointments], div[id*="square-appointments"]');
-                
-                if (squareWidget) {
-                    clearInterval(checkForWidget);
-                    
-                    // Move widget to our container if it's not already there
-                    if (squareWidget.parentElement !== container) {
-                        container.innerHTML = '';
-                        container.appendChild(squareWidget);
-                    }
-                }
-            }, 200);
+            // Find any existing Square widget that was hidden and move it to modal
+            const hiddenSquareWidget = document.querySelector('iframe[src*="squareup.com"]:not([style*="display: none"]), iframe[src*="app.squareup.com"]:not([style*="display: none"]), [data-square-appointments]:not([style*="display: none"])');
             
-            // Stop checking after 5 seconds
-            setTimeout(() => {
-                clearInterval(checkForWidget);
+            if (!hiddenSquareWidget) {
+                // Look for any Square widget (even hidden ones)
+                const anySquareWidget = document.querySelector('iframe[src*="squareup.com"], iframe[src*="app.squareup.com"], [data-square-appointments]');
                 
-                // If widget still not found, show fallback link
-                if (!container.querySelector('iframe, [data-square-appointments]')) {
-                    container.innerHTML = `
-                        <div class="flex flex-col items-center justify-center h-full p-8">
-                            <p class="text-gray-600 mb-4 text-center">Click below to book your appointment</p>
-                            <a href="https://app.squareup.com/appointments/buyer/widget/l869rjoioj715u/H9A47D0JX2NAJ" 
-                               target="_blank" 
-                               class="bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-600 transition-colors">
-                                Book an Appointment
-                            </a>
-                        </div>
-                    `;
+                if (anySquareWidget && container) {
+                    // Show and move widget to our container
+                    (anySquareWidget as HTMLElement).style.display = 'block';
+                    if (anySquareWidget.parentElement !== container) {
+                        container.innerHTML = '';
+                        container.appendChild(anySquareWidget);
+                    }
+                } else {
+                    // Wait for Square widget script to create the widget
+                    const checkForWidget = setInterval(() => {
+                        const squareWidget = document.querySelector('iframe[src*="squareup.com"], iframe[src*="app.squareup.com"], [data-square-appointments]');
+                        
+                        if (squareWidget && container) {
+                            clearInterval(checkForWidget);
+                            (squareWidget as HTMLElement).style.display = 'block';
+                            if (squareWidget.parentElement !== container) {
+                                container.innerHTML = '';
+                                container.appendChild(squareWidget);
+                            }
+                        }
+                    }, 200);
+                    
+                    // Stop checking after 5 seconds
+                    setTimeout(() => {
+                        clearInterval(checkForWidget);
+                        
+                        // If widget still not found, show fallback link
+                        if (!container.querySelector('iframe, [data-square-appointments]')) {
+                            container.innerHTML = `
+                                <div class="flex flex-col items-center justify-center h-full p-8">
+                                    <p class="text-gray-600 mb-4 text-center">Click below to book your appointment</p>
+                                    <a href="https://app.squareup.com/appointments/buyer/widget/l869rjoioj715u/H9A47D0JX2NAJ" 
+                                       target="_blank" 
+                                       class="bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                                        Book an Appointment
+                                    </a>
+                                </div>
+                            `;
+                        }
+                    }, 5000);
                 }
-            }, 5000);
+            } else if (hiddenSquareWidget && container) {
+                // Show the hidden widget and move it to modal
+                (hiddenSquareWidget as HTMLElement).style.display = 'block';
+                if (hiddenSquareWidget.parentElement !== container) {
+                    container.innerHTML = '';
+                    container.appendChild(hiddenSquareWidget);
+                }
+            }
         }
     }
 
@@ -83,10 +121,39 @@
     (window as any).openSquareBooking = openSquareBooking;
     (window as any).closeSquareBooking = closeSquareBooking;
 
-    // Close button handler (for iframe approach if needed later)
+    // Hide auto-displayed Square widget and only show in modal
     document.addEventListener('DOMContentLoaded', () => {
         const closeButton = document.getElementById('close-square-modal');
         const modal = document.getElementById('square-booking-modal');
+        
+        // Function to hide any Square widgets that auto-display on the page
+        const hideAutoSquareWidgets = () => {
+            // Find any Square widget iframes or elements that were auto-created
+            const squareWidgets = document.querySelectorAll('iframe[src*="squareup.com"], iframe[src*="app.squareup.com"], [data-square-appointments]');
+            squareWidgets.forEach(widget => {
+                // Only hide if it's not in our modal container
+                const container = document.getElementById('square-widget-container');
+                if (container && !container.contains(widget)) {
+                    (widget as HTMLElement).style.display = 'none';
+                }
+            });
+        };
+        
+        // Hide auto-displayed widgets immediately and periodically
+        hideAutoSquareWidgets();
+        setTimeout(hideAutoSquareWidgets, 500);
+        setTimeout(hideAutoSquareWidgets, 1000);
+        setTimeout(hideAutoSquareWidgets, 2000);
+        
+        // Watch for new Square widgets being added
+        const observer = new MutationObserver(() => {
+            hideAutoSquareWidgets();
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
         
         if (closeButton) {
             closeButton.addEventListener('click', closeSquareBooking);
