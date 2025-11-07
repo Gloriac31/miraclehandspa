@@ -1,0 +1,47 @@
+---
+// Simple image component that uses direct paths (Vercel compatible)
+interface Props {
+  src: string;
+  alt: string;
+  price?: string;
+  badge?: string;
+  badgeColor?: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  price,
+  badge,
+  badgeColor = 'bg-accent-gold text-charcoal',
+  priority = false,
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`relative mb-4 ${className}`}>
+  <img
+    src={src}
+    alt={alt}
+    width="300"
+    height="200"
+    class="rounded-xl w-full h-32 object-cover"
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+    style="display: block;"
+  />
+  
+  {price && (
+    <div class={`absolute top-3 right-3 ${badgeColor} px-2 py-1 rounded-full font-bold text-sm`}>
+      {price}
+    </div>
+  )}
+  
+  {badge && (
+    <div class={`absolute top-3 left-3 ${badgeColor} px-2 py-1 rounded-full text-xs font-bold`}>
+      {badge}
+    </div>
+  )}
+</div>

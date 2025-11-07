@@ -1,0 +1,53 @@
+---
+// Static image component that doesn't use Astro's Image processing
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  loading?: 'lazy' | 'eager';
+  aspectRatio?: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'scale-down' | 'none';
+  objectPosition?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = '',
+  priority = false,
+  loading = 'lazy',
+  aspectRatio,
+  objectFit = 'cover',
+  objectPosition = 'center'
+} = Astro.props;
+
+// Build CSS classes for aspect ratio and object fit
+const containerClasses = [
+  className,
+  aspectRatio ? `aspect-[${aspectRatio}]` : '',
+  'overflow-hidden'
+].filter(Boolean).join(' ');
+
+const imageClasses = [
+  'w-full h-full',
+  `object-${objectFit}`,
+  objectPosition !== 'center' ? `object-${objectPosition}` : ''
+].filter(Boolean).join(' ');
+---
+
+<div class={containerClasses}>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class={imageClasses}
+    loading={priority ? 'eager' : loading}
+    decoding="async"
+  />
+</div>

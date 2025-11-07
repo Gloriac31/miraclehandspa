@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+
+const breadcrumbItems = [
+  { name: "Home", url: "/" },
+  { name: "Page Not Found" }
+];
+
+const notFoundSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Page Not Found - Miracle Hands",
+  "description": "The page you're looking for doesn't exist. Explore our professional massage therapy services.",
+  "url": "https://miraclehandspa.com/404",
+  "mainEntity": {
+    "@type": "BeautySalon",
+    "name": "Miracle Hands",
+    "url": "https://miraclehandspa.com"
+  }
+};
+---
+
+<Layout 
+  title="Page Not Found - Miracle Hands"
+  description="The page you're looking for doesn't exist. Explore our professional massage therapy services in Coconut Creek."
+>
+  <Fragment slot="head">
+    <!-- 404 Page Specific Meta -->
+    <meta name="robots" content="noindex, follow" />
+    <meta name="keywords" content="page not found, 404 error, Miracle Hands, massage therapy Coconut Creek" />
+    
+    <!-- 404 Schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(notFoundSchema)}></script>
+  </Fragment>
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- 404 Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-primary/10 to-blue-50">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <!-- 404 Number -->
+        <div class="mb-8">
+          <h1 class="text-8xl md:text-9xl font-roboto font-bold text-primary mb-4">404</h1>
+          <h2 class="text-3xl md:text-4xl font-roboto font-bold text-charcoal mb-6">Oops! Page Not Found</h2>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            The page you're looking for seems to have vanished into thin air. But don't worry – 
+            we're here to help you find what you need!
+          </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a 
+            href="/" 
+            class="bg-primary text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-blue-600 transition-colors"
+          >
+            <i class="fa-solid fa-home mr-2"></i>
+            Go Home
+          </a>
+          <a 
+            href="/#contact"
+            class="bg-charcoal text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-gray-800 transition-colors"
+          >
+            <i class="fa-solid fa-calendar-check mr-2"></i>
+            Book Appointment
+          </a>
+        </div>
+
+        <!-- Popular Services -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-roboto font-bold text-charcoal mb-6">Popular Services</h3>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center p-6 bg-offwhite rounded-xl hover:bg-primary/10 transition-colors">
+              <div class="text-3xl text-primary mb-3">
+                <i class="fa-solid fa-hands"></i>
+              </div>
+              <h4 class="font-roboto font-bold text-charcoal mb-2">Deep Tissue Massage</h4>
+              <p class="text-gray-600 text-sm mb-4">Target chronic tension and muscle knots</p>
+              <a href="/#services" class="text-primary font-semibold hover:underline">
+                Learn More →
+              </a>
+            </div>
+            
+            <div class="text-center p-6 bg-offwhite rounded-xl hover:bg-primary/10 transition-colors">
+              <div class="text-3xl text-primary mb-3">
+                <i class="fa-solid fa-running"></i>
+              </div>
+              <h4 class="font-roboto font-bold text-charcoal mb-2">Sports Massage</h4>
+              <p class="text-gray-600 text-sm mb-4">Enhance performance and speed recovery</p>
+              <a href="/#services" class="text-primary font-semibold hover:underline">
+                Learn More →
+              </a>
+            </div>
+            
+            <div class="text-center p-6 bg-offwhite rounded-xl hover:bg-primary/10 transition-colors">
+              <div class="text-3xl text-primary mb-3">
+                <i class="fa-solid fa-leaf"></i>
+              </div>
+              <h4 class="font-roboto font-bold text-charcoal mb-2">Relaxation Massage</h4>
+              <p class="text-gray-600 text-sm mb-4">Unwind and de-stress naturally</p>
+              <a href="/#services" class="text-primary font-semibold hover:underline">
+                Learn More →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mt-12 bg-gradient-to-r from-primary to-blue-600 rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-roboto font-bold mb-4">Need Help Finding Something?</h3>
+          <p class="text-lg mb-6 opacity-90">Our team is here to help you navigate our services and book your appointment.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="tel:+19548129715" 
+              class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
+              <i class="fa-solid fa-phone mr-2"></i>
+              Call 954-812-9715
+            </a>
+            <a 
+              href="/contact" 
+              class="bg-charcoal text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+            >
+              <i class="fa-solid fa-envelope mr-2"></i>
+              Contact Us
+            </a>
+          </div>
+        </div>
+
+        <!-- Site Map Links -->
+        <div class="mt-12">
+          <h3 class="text-xl font-roboto font-bold text-charcoal mb-6">Quick Links</h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <a href="/" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+            <a href="/#services" class="text-gray-600 hover:text-primary transition-colors">Services</a>
+            <a href="/#therapists" class="text-gray-600 hover:text-primary transition-colors">Our Team</a>
+            <a href="/#about" class="text-gray-600 hover:text-primary transition-colors">About</a>
+            <a href="/#testimonials" class="text-gray-600 hover:text-primary transition-colors">Reviews</a>
+            <a href="/contact" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Suggestion -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <h3 class="text-2xl font-roboto font-bold text-charcoal mb-6">Looking for Something Specific?</h3>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Try searching for massage services, pricing, booking information, or our team.
+      </p>
+      
+      <!-- Search Box -->
+      <div class="max-w-md mx-auto">
+        <div class="relative">
+          <input 
+            type="text" 
+            placeholder="Search our services..." 
+            class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            id="search-input"
+          />
+          <button 
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-lg hover:bg-blue-600 transition-colors"
+            onclick="performSearch()"
+          >
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function performSearch() {
+      const searchInput = document.getElementById('search-input') as HTMLInputElement;
+      if (!searchInput) return;
+      
+      const searchTerm = searchInput.value.toLowerCase();
+      const searchMappings = {
+        'massage': '/#services',
+        'deep tissue': '/#services',
+        'sports': '/#services',
+        'relaxation': '/#services',
+        'hot stone': '/#services',
+        'prenatal': '/#services',
+        'pricing': '/#pricing',
+        'price': '/#pricing',
+        'book': '/',
+        'appointment': '/',
+        'about': '/#about',
+        'gloria': '/#therapists',
+        'therapist': '/#therapists',
+        'team': '/#therapists',
+        'contact': '/contact',
+        'home': '/'
+      };
+
+      for (const [keyword, url] of Object.entries(searchMappings)) {
+        if (searchTerm.includes(keyword)) {
+          window.location.href = url;
+          return;
+        }
+      }
+
+      // Default to services section if no match
+      window.location.href = '/#services';
+    }
+
+    // Allow Enter key to trigger search
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            performSearch();
+          }
+        });
+      }
+    });
+  </script>
+</Layout>

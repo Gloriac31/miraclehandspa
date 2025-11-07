@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import StaticImage from './StaticImage.astro';
+
+// ServiceImage component that handles both imported images and public file paths
+interface Props {
+  src: string;
+  alt: string;
+  price?: string;
+  badge?: string;
+  badgeColor?: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  price,
+  badge,
+  badgeColor = 'bg-accent-gold text-charcoal',
+  priority = false,
+  class: className = ''
+} = Astro.props;
+
+// Check if src is a public file path (starts with /) or an imported image
+const isPublicPath = src.startsWith('/');
+---
+
+<div class={`relative mb-4 ${className}`}>
+  {isPublicPath ? (
+    <!-- Use StaticImage component for public file paths -->
+    <StaticImage
+      src={src}
+      alt={alt}
+      width={300}
+      height={200}
+      class="rounded-xl w-full h-32 object-cover"
+      priority={priority}
+    />
+  ) : (
+    <!-- Use Astro Image component for imported images -->
+    <Image
+      src={src}
+      alt={alt}
+      width={300}
+      height={200}
+      class="rounded-xl w-full h-32 object-cover"
+      loading={priority ? 'eager' : 'lazy'}
+      quality={85}
+      format="webp"
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding="async"
+    />
+  )}
+  
+  {price && (
+    <div class={`absolute top-3 right-3 ${badgeColor} px-2 py-1 rounded-full font-bold text-sm`}>
+      {price}
+    </div>
+  )}
+  
+  {badge && (
+    <div class={`absolute top-3 left-3 ${badgeColor} px-2 py-1 rounded-full text-xs font-bold`}>
+      {badge}
+    </div>
+  )}
+</div>

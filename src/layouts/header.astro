@@ -1,0 +1,92 @@
+---
+// Header component for Miracle Hands
+---
+
+<header id="header" class="bg-charcoal shadow-sm sticky top-0 z-50 border-b border-gray-700">
+    <div class="container mx-auto px-8">
+        <div class="flex items-center justify-between py-4">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <img src="/logo.png" alt="Miracle Hands - Spa by Gloria" class="h-20 md:h-40 w-auto" />
+                </a>
+            </div>
+            <nav class="hidden lg:flex items-center space-x-8">
+                <a href="/" class="text-primary font-medium text-base hover:text-blue-400 transition-colors">Home</a>
+                <a href="/#services" class="text-white font-medium text-base hover:text-primary transition-colors">Services</a>
+                <a href="/#therapists" class="text-white font-medium text-base hover:text-primary transition-colors">Our Team</a>
+                <a href="/#about" class="text-white font-medium text-base hover:text-primary transition-colors">About</a>
+                <a href="/#testimonials" class="text-white font-medium text-base hover:text-primary transition-colors">Reviews</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="tel:+19548129715" class="hidden lg:flex items-center text-white font-medium hover:text-primary transition-colors">
+                    <i class="fa-solid fa-phone mr-2"></i>
+                    954-812-9715
+                </a>
+                <a href="/#contact" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                    Book Now
+                </a>
+                <button class="lg:hidden text-white text-xl" id="mobileMenuButton">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    // Mobile menu toggle functionality
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            // Add mobile menu functionality here if needed
+            console.log('Mobile menu clicked');
+        });
+    }
+
+
+    // Handle hash links for smooth scrolling
+    document.addEventListener('DOMContentLoaded', () => {
+        // Handle hash links - works for both /#section and #section formats
+        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.includes('#')) {
+                    const hash = href.split('#')[1];
+                    if (hash) {
+                        // If we're on the home page, prevent navigation and scroll smoothly
+                        if (window.location.pathname === '/' || window.location.pathname === '') {
+                            const target = document.querySelector(`#${hash}`);
+                            if (target) {
+                                e.preventDefault();
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                                // Update URL without reload
+                                window.history.pushState(null, '', `#${hash}`);
+                            }
+                        }
+                        // If on another page, let the browser navigate to /#section
+                        // The hash will be handled after page load
+                    }
+                }
+            });
+        });
+
+        // Handle hash links when page loads with a hash (from other pages or refresh)
+        if (window.location.hash) {
+            setTimeout(() => {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    // Account for sticky header height
+                    const headerHeight = document.getElementById('header')?.offsetHeight || 0;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    });
+</script>

@@ -1,0 +1,35 @@
+---
+// SearchAtlas Dynamic Optimization Component
+// This component loads the SearchAtlas dynamic optimization script for SEO improvements
+---
+
+<script>
+  // SearchAtlas Dynamic Optimization Script
+  function loadSearchAtlasScript() {
+    // Check if script is already loaded to prevent duplicates
+    if (document.getElementById('sa-dynamic-optimization-loader')) {
+      return;
+    }
+
+    // Create the script element
+    const script = document.createElement('script');
+    script.setAttribute('nowprocket', '');
+    script.setAttribute('nitro-exclude', '');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('id', 'sa-dynamic-optimization');
+    script.setAttribute('data-uuid', 'd7c526cd-de0a-4f04-8591-763604062e4f');
+    script.setAttribute('src', 'data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gImQ3YzUyNmNkLWRlMGEtNGYwNC04NTkxLTc2MzYwNDA2MmU0ZiI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw==');
+    
+    // Add to head
+    document.head.appendChild(script);
+    
+    console.log('SearchAtlas dynamic optimization script loaded');
+  }
+
+  // Load when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSearchAtlasScript);
+  } else {
+    loadSearchAtlasScript();
+  }
+</script>

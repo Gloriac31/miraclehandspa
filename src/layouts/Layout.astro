@@ -1,0 +1,213 @@
+---
+import '../styles/global.css';
+import Header from './header.astro';
+import Footer from './footer.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
+import GoogleTagManager from '../components/analytics/GoogleTagManager.astro';
+import SearchAtlas from '../components/analytics/SearchAtlas.astro';
+import FacebookPixel from '../components/analytics/FacebookPixel.astro';
+// Using static favicon paths to avoid image metadata processing issues
+
+const {
+  title = "Miracle Hands - Professional Massage Therapy",
+  description = "Experience the transformative power of professional massage therapy. From deep tissue to sports massage, our expert therapists help you heal, relax, and refresh your body naturally.",
+} = (globalThis as any).Astro?.props || {};
+
+
+// Get current URL for canonical - always use non-www subdomain
+const currentUrl = Astro.url;
+// Force canonical URL to always use non-www subdomain regardless of how the page was accessed
+const canonicalUrl = `https://miraclehandspa.com${currentUrl.pathname}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Google Tag Manager -->
+    <GoogleTagManager />
+    
+    <!-- Facebook Pixel -->
+    <FacebookPixel pixelId="YOUR_PIXEL_ID" />
+    
+    <!-- Comprehensive SEO Meta Tags -->
+    <meta name="keywords" content="massage therapy Coconut Creek, deep tissue massage, sports massage, relaxation massage, professional massage therapist, Gloria Restrepo, Miracle Hands, smooth skin, confidence, medical-grade equipment, transparent pricing, personalized care" />
+    <meta name="author" content="Miracle Hands - Gloria Restrepo" />
+    <meta name="publisher" content="Miracle Hands" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Miracle Hands" />
+    <meta name="application-name" content="Miracle Hands" />
+    <meta name="msapplication-TileColor" content="#FFDE59" />
+    <meta name="theme-color" content="#FFDE59" />
+    
+    <!-- Business Information -->
+    <meta name="business:contact_data:street_address" content="2747 Carambola Cir S" />
+    <meta name="business:contact_data:locality" content="Coconut Creek" />
+    <meta name="business:contact_data:region" content="FL" />
+    <meta name="business:contact_data:postal_code" content="33066" />
+    <meta name="business:contact_data:country_name" content="United States" />
+    <meta name="business:contact_data:phone_number" content="+1-954-812-9715" />
+    
+    <!-- Service Areas -->
+    <meta name="geo.region" content="US-FL" />
+    <meta name="geo.placename" content="Coconut Creek, Deerfield Beach, Boca Raton, Delray Beach, Fort Lauderdale" />
+    <meta name="geo.position" content="26.270000;-80.169722" />
+    <meta name="ICBM" content="26.270000, -80.169722" />
+    
+    <!-- Google Analytics -->
+    <GoogleAnalytics measurementId="G-BRQW1FD72H" />
+    
+    <!-- Enhanced Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og-image.jpg', 'https://miraclehandspa.com')} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Miracle Hands - Professional massage therapy in Coconut Creek, FL" />
+    <meta property="og:site_name" content="Miracle Hands" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:updated_time" content={new Date().toISOString()} />
+    
+    <!-- Enhanced Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={new URL('/og-image.jpg', 'https://miraclehandspa.com')} />
+    <meta property="twitter:image:alt" content="Miracle Hands - Professional massage therapy in Coconut Creek, FL" />
+    <meta property="twitter:site" content="@miraclehandspa" />
+    <meta property="twitter:creator" content="@miraclehandspa" />
+    
+    <!-- Additional SEO -->
+    
+    <!-- Comprehensive Structured Data -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "name": "Miracle Hands",
+        "description": "Professional massage therapy in Coconut Creek, FL. Experience the transformative power of professional massage therapy. From deep tissue to sports massage, our expert therapists help you heal, relax, and refresh your body naturally.",
+        "url": "https://miraclehandspa.com",
+        "telephone": "+1-954-812-9715",
+        "email": "gloria@miraclehandspa.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2747 Carambola Cir S",
+          "addressLocality": "Coconut Creek",
+          "addressRegion": "FL",
+          "postalCode": "33066",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "26.270000",
+          "longitude": "-80.169722"
+        },
+        "openingHours": "Mo-Fr 09:00-19:00, Sa 09:00-16:00",
+        "priceRange": "$$",
+        "paymentAccepted": "Cash, Credit Card, Financing",
+        "currenciesAccepted": "USD",
+        "serviceArea": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": "26.270000",
+            "longitude": "-80.169722"
+          },
+          "geoRadius": "50000"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Massage Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sports Massage",
+                "description": "Professional sports massage to improve performance and prevent injuries"
+              },
+              "price": "60",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer", 
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Deep Tissue Massage",
+                "description": "Professional deep tissue massage to relieve muscle tension and improve mobility"
+              },
+              "price": "70",
+              "priceCurrency": "USD"
+            }
+          ]
+        },
+        "founder": {
+          "@type": "Person",
+            "name": "Gloria Restrepo",
+          "jobTitle": "Professional Massage Therapist & Founder"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "100",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.facebook.com/miraclehandspa",
+          "https://www.instagram.com/miraclehandspa",
+          "https://www.yelp.com/biz/miracle-hands-spa-coconut-creek"
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <script is:inline>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="300x300" href="/favicon-300x300.png">
+    <link rel="icon" type="image/png" sizes="150x150" href="/favicon-150x150.png">
+    <link rel="icon" type="image/png" sizes="50x50" href="/favicon-50x50.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-50x50.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-50x50.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-300x300.png">
+    <meta name="theme-color" content="#FFDE59">
+
+    <slot name="head" />
+  </head>
+
+  <body class="bg-white font-arial">
+    <!-- Google Tag Manager (noscript) -->
+    <GoogleTagManager />
+    
+    <!-- SearchAtlas Dynamic Optimization -->
+    <SearchAtlas />
+    
+    <Header />
+    <main><slot /></main>
+    <Footer />
+  </body>
+</html>

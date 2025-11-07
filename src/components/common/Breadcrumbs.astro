@@ -1,0 +1,50 @@
+---
+interface BreadcrumbItem {
+  name: string;
+  url?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  visible?: boolean; // New prop to control visibility
+}
+
+const { items, visible = false } = Astro.props;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": item.url || undefined
+  }))
+};
+---
+
+<!-- SEO Structured Data - Always present for crawlers -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+
+<!-- Visual Breadcrumbs - Hidden by default, can be shown if needed -->
+<nav 
+  class={`container mx-auto px-4 py-4 text-sm text-gray-600 ${visible ? 'block' : 'sr-only'}`} 
+  aria-label="breadcrumbs"
+>
+  <ol class="flex space-x-2">
+    {items.map((item, index) => (
+      <li class="flex items-center">
+        {item.url ? (
+          <a href={item.url} class="hover:text-accent-gold transition-colors">{item.name}</a>
+        ) : (
+          <span>{item.name}</span>
+        )}
+        {index < items.length - 1 && (
+          <svg class="flex-shrink-0 mx-2 h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+          </svg>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

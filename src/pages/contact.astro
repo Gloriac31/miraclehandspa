@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/home/Contact.astro';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+
+const breadcrumbItems = [
+  { name: "Home", url: "/" },
+  { name: "Contact" }
+];
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Miracle Hands",
+  "description": "Contact Miracle Hands for professional home service massage therapy in Coconut Creek. Call, email, or book online for your appointment.",
+  "url": "https://miraclehandspa.com/contact",
+  "mainEntity": {
+    "@type": "BeautySalon",
+    "name": "Miracle Hands",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2747 Carambola Cir S",
+      "addressLocality": "Coconut Creek",
+      "addressRegion": "FL",
+      "postalCode": "33066",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-954-812-9715",
+    "email": "gloria@miraclehandspa.com",
+    "openingHours": "Mo-Fr 09:00-20:00, Sa 08:00-18:00, Su 10:00-17:00",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "26.270000",
+      "longitude": "-80.169722"
+    }
+  }
+};
+
+const title = "Contact Miracle Hands - Professional Home Service Massage Therapy";
+const description = "Contact Miracle Hands for professional home service massage therapy in Coconut Creek, FL. Call (954) 812-9715 or book online to schedule your appointment.";
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- Contact Page Specific Meta -->
+    <meta name="keywords" content="contact Miracle Hands Coconut Creek, massage therapy phone number, home service massage, massage appointment booking, contact massage therapist, (954) 812-9715" />
+    <meta property="og:title" content="Contact Miracle Hands - Get In Touch Today" />
+    <meta property="og:description" content="Contact Miracle Hands for professional home service massage therapy in Coconut Creek. Call, email, or book online for your appointment." />
+    <meta property="twitter:title" content="Contact Miracle Hands - Get In Touch Today" />
+    <meta property="twitter:description" content="Contact Miracle Hands for professional home service massage therapy in Coconut Creek. Call, email, or book online for your appointment." />
+
+    <!-- Contact Schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)}></script>
+  </Fragment>
+
+  <Breadcrumbs items={breadcrumbItems} />
+  <ContactForm />
+</Layout>

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TermsOfServiceContent from '../components/TermsOfService.astro';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+
+const breadcrumbItems = [
+  { name: "Home", url: "/" },
+  { name: "Terms of Service" }
+];
+
+const title = "Terms of Service - Miracle Hands";
+const description = "Read Miracle Hands' Terms of Service to understand the rules and guidelines for using our massage therapy services and website.";
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumbs items={breadcrumbItems} />
+  <TermsOfServiceContent />
+</Layout>
+
