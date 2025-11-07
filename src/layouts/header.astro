@@ -22,9 +22,9 @@
                     <i class="fa-solid fa-phone mr-2"></i>
                     954-812-9715
                 </a>
-                <a href="/#contact" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                <button onclick="openSquareBooking()" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors">
                     Book Now
-                </a>
+                </button>
                 <button class="lg:hidden text-white text-xl" id="mobileMenuButton">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -42,6 +42,8 @@
             console.log('Mobile menu clicked');
         });
     }
+
+    // openSquareBooking function is now defined in SquareBooking component
 
 
     // Handle hash links for smooth scrolling

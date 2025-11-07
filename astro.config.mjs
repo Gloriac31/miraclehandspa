@@ -3,15 +3,14 @@ import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'url'
 import tailwind from '@astrojs/tailwind'
 import partytown from '@astrojs/partytown'
-import clerk from '@clerk/astro'
 import vercel from '@astrojs/vercel'
 import compress from 'astro-compress'
-import sonda from 'sonda/astro'
 import { passthroughImageService } from 'astro/config'
+// import sonda from 'sonda/astro'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mjlaseraesthetic.com',
+  site: 'https://miraclehandspa.com',
   output: 'server',
   adapter: vercel({
     imageService: false, // Disable image service to use static assets
@@ -24,7 +23,6 @@ export default defineConfig({
   integrations: [
     tailwind(),
     partytown({ config: { forward: ['datalayer.pageview'] } }),
-    clerk(),
     // sonda({
     //   server: true,
     // }),
@@ -55,7 +53,7 @@ export default defineConfig({
         '.ngrok-free.app',
         '.ngrok-free.dev',
         '.ngrok.io',
-        'staging.mjlaseraesthetic.com',
+        'staging.miraclehandsspa.com',
       ],
     },
   },
@@ -78,17 +76,6 @@ export default defineConfig({
         access: 'secret',
       },
       NODE_ENV: {
-        type: 'string',
-        context: 'server',
-        access: 'secret',
-      },
-      // Clerk environment variables
-      PUBLIC_CLERK_PUBLISHABLE_KEY: {
-        type: 'string',
-        context: 'server',
-        access: 'public',
-      },
-      CLERK_SECRET_KEY: {
         type: 'string',
         context: 'server',
         access: 'secret',

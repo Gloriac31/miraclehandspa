@@ -5,7 +5,8 @@ import Footer from './footer.astro';
 import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
 import GoogleTagManager from '../components/analytics/GoogleTagManager.astro';
 import SearchAtlas from '../components/analytics/SearchAtlas.astro';
-import FacebookPixel from '../components/analytics/FacebookPixel.astro';
+// import FacebookPixel from '../components/analytics/FacebookPixel.astro';
+import SquareBooking from '../components/common/SquareBooking.astro';
 // Using static favicon paths to avoid image metadata processing issues
 
 const {
@@ -32,8 +33,8 @@ const canonicalUrl = `https://miraclehandspa.com${currentUrl.pathname}`;
     <!-- Google Tag Manager -->
     <GoogleTagManager />
     
-    <!-- Facebook Pixel -->
-    <FacebookPixel pixelId="YOUR_PIXEL_ID" />
+    <!-- Facebook Pixel - Disabled (no pixel ID configured) -->
+    <!-- <FacebookPixel pixelId="YOUR_PIXEL_ID" /> -->
     
     <!-- Comprehensive SEO Meta Tags -->
     <meta name="keywords" content="massage therapy Coconut Creek, deep tissue massage, sports massage, relaxation massage, professional massage therapist, Gloria Restrepo, Miracle Hands, smooth skin, confidence, medical-grade equipment, transparent pricing, personalized care" />
@@ -184,7 +185,9 @@ const canonicalUrl = `https://miraclehandspa.com${currentUrl.pathname}`;
     
     <!-- Font Awesome -->
     <script is:inline>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    
+    <!-- Square Appointments Widget Script - Loaded in SquareBooking component -->
 
 
     <!-- Favicons -->
@@ -209,5 +212,6 @@ const canonicalUrl = `https://miraclehandspa.com${currentUrl.pathname}`;
     <Header />
     <main><slot /></main>
     <Footer />
+    <SquareBooking />
   </body>
 </html>
